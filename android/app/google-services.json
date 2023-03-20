@@ -29,6 +29,13 @@
             {
               "client_id": "561346139793-krnihtbrs74qa1s5vrd40olu6njdbuft.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "561346139793-12b889lbbt5185a8qkd637ca2bsbe44t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.starwarsProject"
+              }
             }
           ]
         }
