@@ -4,8 +4,10 @@ import 'package:starwars_project/components/header.dart';
 import 'package:starwars_project/components/loading/loading.dart';
 import 'package:starwars_project/components/my_scaffold.dart';
 import 'package:starwars_project/provider/api/fetch_api.dart';
+import 'package:starwars_project/screens/home/components/charts.dart';
+import 'package:starwars_project/screens/home/components/charts_two.dart';
 import 'package:starwars_project/screens/home/components/list_http.dart';
-import 'package:starwars_project/screens/home/widget/fav_list.dart';
+import 'package:starwars_project/screens/home/components/fav_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,9 +23,15 @@ class HomeScreen extends StatelessWidget {
       child: api.loading
           ? const LoadingScreen()
           : Column(
-              children:  [
+              children: [
                 const MyHeader(),
-                ListHttp(controller: controller,),
+                Charts(
+                  controller: controller,
+                ),
+                ChartsTwo(controller: controller),
+                ListHttp(
+                  controller: controller,
+                ),
                 const Expanded(child: FavList()),
               ],
             ),

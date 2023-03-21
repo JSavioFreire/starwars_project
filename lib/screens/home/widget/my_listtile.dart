@@ -8,12 +8,14 @@ class MyListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ListTile(
       onTap: () {
         showModal(context: context, person: person);
       },
-      title: Text(person.name.toString()),
+      title: Text(
+        person.name.toString(),
+        style: const TextStyle(color: Colors.white),
+      ),
     );
   }
 }

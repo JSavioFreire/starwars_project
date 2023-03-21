@@ -12,14 +12,31 @@ class ListHttp extends StatelessWidget {
         animation: Listenable.merge([controller.api]),
         builder: (context, child) {
           return Expanded(
-            child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: controller.api.value.length,
-                itemBuilder: ((context, index) {
-                  return MyListTile(
-                    person: controller.api.value[index],
-                  );
-                })),
+            child: Container(
+              color: Colors.grey[900],
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 12),
+                    child: Text(
+                      'Todos os personagens',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: controller.api.value.length,
+                        padding: EdgeInsets.zero,
+                        itemBuilder: ((context, index) {
+                          return MyListTile(
+                            person: controller.api.value[index],
+                          );
+                        })),
+                  ),
+                ],
+              ),
+            ),
           );
         });
   }
