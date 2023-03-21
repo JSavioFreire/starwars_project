@@ -1,18 +1,19 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:starwars_project/data/open_db.dart';
+import 'package:starwars_project/model/info_model.dart';
 
 class InfoDao {
-  static const String taskdatabase = 'CREATE TABLE $tableName('
+  static const String favdatabase = 'CREATE TABLE $tableName('
       '$name TEXT)';
 
-  static const String tableName = 'taskTable';
+  static const String tableName = 'favTable';
 
   static const String name = 'name';
 
-  save(newTask) async {
+  save(InfoModel newFav) async {
     final Database dataBase = await getDataBase();
-    Map<String, dynamic> newTaskMap = toMap(newTask);
-    return await dataBase.insert(tableName, newTaskMap);
+    Map<String, dynamic> newFavMap = toMap(newFav);
+    return await dataBase.insert(tableName, newFavMap);
   }
 
   Future findAll() async {
@@ -21,37 +22,37 @@ class InfoDao {
     return toList(result);
   }
 
-  Future find(String taskBuscada) async {
+  Future find(String favBuscada) async {
     final Database dataBase = await getDataBase();
     final List<Map<String, dynamic>> result = await dataBase.query(
       tableName,
       where: '$name = ?',
-      whereArgs: [taskBuscada],
+      whereArgs: [favBuscada],
     );
     return toList(result);
   }
 
-  delete(String taskName) async {
+  delete(String favName) async {
     final Database dataBase = await getDataBase();
     return dataBase.delete(
       tableName,
       where: '$name = ?',
-      whereArgs: [taskName],
+      whereArgs: [favName],
     );
   }
 
-  Map<String, dynamic> toMap(eachTask) {
-    final Map<String, dynamic> taskMap = {};
-    taskMap[name] = eachTask.title;
-    return taskMap;
+  Map<String, dynamic> toMap(eachfav) {
+    final Map<String, dynamic> favMap = {};
+    favMap[name] = eachfav.name;
+    return favMap;
   }
 
-  List toList(List<Map<String, dynamic>> taskMap) {
-    final List taskList = [];
-    for (Map<String, dynamic> eachTask in taskMap) {
-      final tasks = (eachTask['name']);
-      taskList.add(tasks);
+  List toList(List<Map<String, dynamic>> favMap) {
+    final List favList = [];
+    for (Map<String, dynamic> eachfav in favMap) {
+      final favs = (eachfav['name']);
+      favList.add(favs);
     }
-    return taskList;
+    return favList;
   }
 }

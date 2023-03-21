@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:starwars_project/api/fetch_api.dart';
+import 'package:starwars_project/provider/api/fetch_api.dart';
 import 'package:starwars_project/firebase_options.dart';
 import 'package:starwars_project/provider/auth/auth_provider.dart';
 import 'package:starwars_project/provider/auth/func_auth_provider.dart';
@@ -16,6 +16,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => AuthProvider()),
       ChangeNotifierProvider(create: (context) => FuncAuthProvider()),
+      ChangeNotifierProvider(create: (context) => Api()),
     ],
     child: const MyApp(),
   ));
@@ -27,11 +28,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const CheckIsAuth(),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const CheckIsAuth());
   }
 }

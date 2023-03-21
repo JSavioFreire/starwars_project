@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:starwars_project/api/fetch_api.dart';
+import 'package:starwars_project/components/loading/loading.dart';
+import 'package:starwars_project/provider/api/fetch_api.dart';
+import 'package:starwars_project/screens/home/widget/my_listtile.dart';
 
 class ListHttp extends StatelessWidget {
   const ListHttp({super.key});
@@ -12,21 +14,17 @@ class ListHttp extends StatelessWidget {
     return AnimatedBuilder(
         animation: Listenable.merge([controller.loading, controller.api]),
         builder: ((context, child) => controller.loading.value
-            ? const CircularProgressIndicator()
+            ? const LoadingScreen()
             : AnimatedBuilder(
                 animation: Listenable.merge([controller.api]),
                 builder: (context, child) {
                   return Expanded(
-                    child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio:
-                                MediaQuery.of(context).size.width /
-                                    (MediaQuery.of(context).size.height / 3.5)),
+                    child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
                         itemCount: controller.api.value.length,
                         itemBuilder: ((context, index) {
-                          return Text(
-                            controller.api.value[0].name,
+                          return MyListTile(
+                            person: controller.api.value[index],
                           );
                         })),
                   );
