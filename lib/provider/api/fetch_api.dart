@@ -5,8 +5,12 @@ import 'package:starwars_project/model/fetch_http_model.dart';
 
 class Api extends ChangeNotifier {
   ValueNotifier api = ValueNotifier([]);
-  ValueNotifier loading = ValueNotifier(true);
+  bool loading = true;
   String url = 'https://swapi.dev/api/people';
+
+  Api() {
+    callApi();
+  }
 
   void refresh() {
     notifyListeners();
@@ -14,7 +18,7 @@ class Api extends ChangeNotifier {
 
   callApi() async {
     var client = http.Client();
-    loading.value = true;
+    loading = true;
     try {
       var response = await client.get(Uri.parse(url));
       var res = jsonDecode(response.body);
@@ -23,7 +27,7 @@ class Api extends ChangeNotifier {
       notifyListeners();
     } finally {
       client.close();
-      loading.value = false;
+      loading = false;
       notifyListeners();
     }
   }
